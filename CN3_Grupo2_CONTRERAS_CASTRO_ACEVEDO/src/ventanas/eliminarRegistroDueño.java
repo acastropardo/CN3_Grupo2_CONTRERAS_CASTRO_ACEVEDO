@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import CRUD.duenoMascota;
+import vo.duenoMascota;
 
 /**
  *

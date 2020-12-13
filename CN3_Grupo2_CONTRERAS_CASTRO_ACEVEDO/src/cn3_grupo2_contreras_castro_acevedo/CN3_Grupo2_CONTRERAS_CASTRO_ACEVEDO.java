@@ -5,8 +5,8 @@
  */
 package cn3_grupo2_contreras_castro_acevedo;
 
-import CRUD.accesoCRUDClinicaVet;
-import CRUD.duenoMascota;
+import db.BaseDatos;
+import vo.duenoMascota;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
@@ -43,9 +43,9 @@ public class CN3_Grupo2_CONTRERAS_CASTRO_ACEVEDO {
         //la llave se setea a parte, no requiere constructor en el objeto con ese parametro porque, ya que la actualizacion en si, recibe el objeto ya cargado de una lectura anterior, como el select *, esto es unicamente una prueba
         
         objDuenoMascota.setIdDuenoMascota(4);
-        accesoCRUDClinicaVet.actualizarDuenoMascota(objDuenoMascota);
+        BaseDatos.actualizarDuenoMascota(objDuenoMascota);
         
-        List<duenoMascota> duenos = accesoCRUDClinicaVet.listarDuenosMascotas();
+        List<duenoMascota> duenos = BaseDatos.listarDuenosMascotas();
         for (int contador = 0; contador < duenos.size(); contador++) { 		      
           System.out.println(duenos.get(contador).getIdDuenoMascota()+" "+duenos.get(contador).getNombre()+" "+duenos.get(contador).getApellido()+" "+duenos.get(contador).getEdad()+" "+duenos.get(contador).getSexo()+" "+duenos.get(contador).getNombreMascota()+" "+duenos.get(contador).getSexoMascota()); 		
       } 

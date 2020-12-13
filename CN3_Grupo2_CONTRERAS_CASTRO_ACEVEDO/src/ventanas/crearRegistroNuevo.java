@@ -5,7 +5,8 @@
  */
 package ventanas;
 
-import CRUD.*;
+import db.BaseDatos;
+import vo.duenoMascota;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -260,7 +261,7 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
         String txtSexoMascota = (String) ComboSexoMascota.getSelectedItem();
         objDuenoMascota = new duenoMascota(txtNombre.getText(), txtApellido.getText(), Integer.valueOf(txtEdad.getText()), txtSexoDueno.charAt(0), txtNombreMascota.getText(), txtSexoMascota.charAt(0));
         try {
-            accesoCRUDClinicaVet.agregarDuenoMascota(objDuenoMascota);
+            BaseDatos.agregarDuenoMascota(objDuenoMascota);
             
             JOptionPane.showConfirmDialog(null, "Datos ingresados correctamente","OK", JOptionPane.PLAIN_MESSAGE);
             

@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CRUD;
+package db;
 
-import CRUD.conexionBD;
+import db.conexionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import CRUD.duenoMascota;
+import vo.duenoMascota;
 import java.util.List;
 import java.util.ArrayList;
 //import java.util.Hashtable;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  *
  * @author abrah
  */
-public class accesoCRUDClinicaVet {
+public class BaseDatos {
 
     public static void actualizarDuenoMascota(duenoMascota objDuenoMascota) throws SQLException {
         try {
@@ -83,7 +83,15 @@ public class accesoCRUDClinicaVet {
 
     }
 
-    //public List<Person> listCustomersWithName(String name) throws SQLException {
+    public static ResultSet leerDuenosMascotas() throws SQLException{
+        Connection conn = conexionBD.getConexion();
+
+        PreparedStatement pst = conn.prepareStatement("SELECT * FROM DuenoMascota");
+        ResultSet rs = pst.executeQuery();
+        return rs;
+        
+    }
+    
     public static List<duenoMascota> listarDuenosMascotas() throws SQLException {
 
         Connection conn = conexionBD.getConexion();
