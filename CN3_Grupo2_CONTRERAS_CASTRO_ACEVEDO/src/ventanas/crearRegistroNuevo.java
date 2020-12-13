@@ -5,6 +5,12 @@
  */
 package ventanas;
 
+import CRUD.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author oacon
@@ -36,13 +42,11 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
         txtEdad = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btnModificarImformacion = new javax.swing.JButton();
+        btnIngresarRegistro = new javax.swing.JButton();
         ComboSexoDueño = new javax.swing.JComboBox<>();
         ComboSexoMascota = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -82,8 +86,6 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
 
         jLabel5.setText("Apellido");
 
-        jLabel1.setText("ID Dueño:");
-
         jLabel2.setText("Nombre ");
 
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +98,12 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
         jLabel4.setText("Crear Registro ");
 
-        btnModificarImformacion.setText("Crear");
+        btnIngresarRegistro.setText("Crear");
+        btnIngresarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarRegistroActionPerformed(evt);
+            }
+        });
 
         ComboSexoDueño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F", " " }));
 
@@ -138,7 +145,7 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(10, 10, 10)
-                                    .addComponent(btnModificarImformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnIngresarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnVolverAlMenuP, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jSeparator1)
@@ -157,18 +164,16 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
                                                     .addComponent(ComboSexoMascota, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel1)
                                                 .addComponent(jLabel2)
                                                 .addComponent(jLabel5)
                                                 .addComponent(jLabel6)
                                                 .addComponent(jLabel11))
-                                            .addGap(70, 70, 70)
+                                            .addGap(79, 79, 79)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(txtApellido)
                                                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(ComboSexoDueño, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(ComboSexoDueño, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGap(0, 0, Short.MAX_VALUE)))
                             .addGap(9, 9, 9)))))
         );
@@ -184,11 +189,7 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(95, 95, 95)
                     .addComponent(jLabel10)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(27, 27, 27)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -221,7 +222,7 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnLimpiar)
                         .addComponent(btnVolverAlMenuP)
-                        .addComponent(btnModificarImformacion))
+                        .addComponent(btnIngresarRegistro))
                     .addContainerGap()))
         );
 
@@ -251,6 +252,22 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
     private void txtEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEdadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEdadActionPerformed
+
+    private void btnIngresarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarRegistroActionPerformed
+        // TODO add your handling code here:
+        duenoMascota objDuenoMascota;
+        String txtSexoDueno = (String) ComboSexoDueño.getSelectedItem();
+        String txtSexoMascota = (String) ComboSexoMascota.getSelectedItem();
+        objDuenoMascota = new duenoMascota(txtNombre.getText(), txtApellido.getText(), Integer.valueOf(txtEdad.getText()), txtSexoDueno.charAt(0), txtNombreMascota.getText(), txtSexoMascota.charAt(0));
+        try {
+            accesoCRUDClinicaVet.agregarDuenoMascota(objDuenoMascota);
+            
+            JOptionPane.showConfirmDialog(null, "Datos ingresados correctamente","OK", JOptionPane.PLAIN_MESSAGE);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(crearRegistroNuevo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnIngresarRegistroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,10 +307,9 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboSexoDueño;
     private javax.swing.JComboBox<String> ComboSexoMascota;
+    private javax.swing.JButton btnIngresarRegistro;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnModificarImformacion;
     private javax.swing.JButton btnVolverAlMenuP;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -304,7 +320,6 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtNombre;
