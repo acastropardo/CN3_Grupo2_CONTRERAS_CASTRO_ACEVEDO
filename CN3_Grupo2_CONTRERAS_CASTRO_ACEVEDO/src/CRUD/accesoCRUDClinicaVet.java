@@ -22,11 +22,11 @@ import java.util.ArrayList;
  */
 public class accesoCRUDClinicaVet {
 
-    public static void agregarDuenoMascota(duenoMascota objDuenoMascota) throws SQLException {
+    public static void actualizarDuenoMascota(duenoMascota objDuenoMascota) throws SQLException {
         try {
             Connection conn = conexionBD.getConexion();
 
-            String sql = "insert into DuenoMascota values (?,?,?,?,?,?)";
+            String sql = "update DuenoMascota SET nombre = ?, apellido = ?, edad = ?, sexo = ?, nombreMascota = ?, sexoMascota = ? where idDuenoMascota = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
 
             pst.setString(1, objDuenoMascota.getNombre());
@@ -35,6 +35,45 @@ public class accesoCRUDClinicaVet {
             pst.setString(4, String.valueOf(objDuenoMascota.getSexo()));
             pst.setString(5, objDuenoMascota.getNombreMascota());
             pst.setString(6, String.valueOf(objDuenoMascota.getSexoMascota()));
+            pst.setInt(7, objDuenoMascota.getIdDuenoMascota());
+            pst.execute();
+            System.out.println("Datos de dueño de mascota  actualizados correctamente");
+
+        } catch (SQLException e) {
+            System.err.println("Excepcion de SQL: " + e);
+        }
+    }
+
+    public static void eliminarDuenoMascota(duenoMascota objDuenoMascota) throws SQLException {
+        try {
+            Connection conn = conexionBD.getConexion();
+
+            String sql = "delete from DuenoMascota where idDuenoMascota = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setInt(1, objDuenoMascota.getIdDuenoMascota());
+            pst.execute();
+            System.out.println("Datos de dueño de mascota  eliminados correctamente");
+
+        } catch (SQLException e) {
+            System.err.println("Excepcion de SQL: " + e);
+        }
+    }
+
+    public static void agregarDuenoMascota(duenoMascota objDuenoMascota) throws SQLException {
+        try {
+            Connection conn = conexionBD.getConexion();
+
+            String sql = "insert into DuenoMascota values (?,?,?,?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setInt(1, 0);
+            pst.setString(2, objDuenoMascota.getNombre());
+            pst.setString(3, objDuenoMascota.getApellido());
+            pst.setInt(4, objDuenoMascota.getEdad());
+            pst.setString(5, String.valueOf(objDuenoMascota.getSexo()));
+            pst.setString(6, objDuenoMascota.getNombreMascota());
+            pst.setString(7, String.valueOf(objDuenoMascota.getSexoMascota()));
             pst.execute();
             System.out.println("Datos de dueño de mascota  ingresados correctamente");
 
@@ -43,6 +82,7 @@ public class accesoCRUDClinicaVet {
         }
 
     }
+
     //public List<Person> listCustomersWithName(String name) throws SQLException {
     public static List<duenoMascota> listarDuenosMascotas() throws SQLException {
 
@@ -52,9 +92,10 @@ public class accesoCRUDClinicaVet {
         ResultSet rs = pst.executeQuery();
 
         List<duenoMascota> duenos = new ArrayList<duenoMascota>();
-        
+
         while (rs.next()) {
             duenoMascota duenoMasc = new duenoMascota();
+            duenoMasc.setIdDuenoMascota(rs.getInt("idDuenoMascota"));
             duenoMasc.setNombre(rs.getString("nombre"));
             duenoMasc.setApellido(rs.getString("apellido"));
             duenoMasc.setEdad(rs.getInt("edad"));

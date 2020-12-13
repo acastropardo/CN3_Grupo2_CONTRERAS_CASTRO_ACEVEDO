@@ -16,6 +16,7 @@ public class duenoMascota {
     private char sexo;
     private String nombreMascota;
     private char sexoMascota;
+    private int idDuenoMascota;
 
     /**
      * @param nombre
@@ -27,6 +28,8 @@ public class duenoMascota {
      */
     
     public duenoMascota(String nombre, String apellido, int edad, char sexo, String nombreMascota, char sexoMascota) {
+        //acp constructor para crear registros, no se necesita llave idDuenoMascota porque es autoincremental
+        
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
@@ -36,7 +39,7 @@ public class duenoMascota {
     }
     
     public duenoMascota(){
-        
+        //constructor vacio para cuando se desea setear unicamente idDuenoMascota, indice para eliminar acp
     }
     
     public String getNombre() {
@@ -118,6 +121,20 @@ public class duenoMascota {
      */
     public void setSexoMascota(char sexoMascota) {
         this.sexoMascota = sexoMascota;
+    }
+
+    /**
+     * @return the idDuenoMascota
+     */
+    public int getIdDuenoMascota() {
+        return idDuenoMascota;
+    }
+
+    /**
+     * @param idDuenoMascota the idDuenoMascota to set
+     */
+    public void setIdDuenoMascota(int idDuenoMascota) {
+        this.idDuenoMascota = idDuenoMascota;
     }
     
 }
