@@ -6,31 +6,35 @@
 package operaciones;
 
 import javax.swing.JOptionPane;
+import ventanas.menuPrincipal;
+import javax.swing.*;
 
 /**
  *
  * @author joseacevedo
  */
 public class Logica {
-    
-    private String Usuario ;
-    private String Clave ;
+
+    private String Usuario;
+    private String Clave;
 
     public Logica(String Usuario, String Clave) {
         this.Usuario = Usuario;
         this.Clave = Clave;
     }
-    
-    public void Validacion(){
-    
+
+    public void Validacion() {
+
         if ((Usuario.equals("admin")) && (Clave.equals("abcdef"))) {
             JOptionPane.showMessageDialog(null, "acceso correcto");
-            
-        }else{
+            menuPrincipal menuP = new menuPrincipal();
+            menuP.setVisible(true);
+
+        } else {
             JOptionPane.showMessageDialog(null, "Credenciales Erroneas");
-            
+
         }
-        
+
     }
 
     public String getUsuario() {
@@ -48,6 +52,5 @@ public class Logica {
     public void setClave(String Clave) {
         this.Clave = Clave;
     }
-    
-    
+
 }
