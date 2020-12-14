@@ -105,14 +105,15 @@ public class tablaRegistroDueños extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverAlMenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverAlMenuPActionPerformed
         // TODO add your handling code here:
-        menuPrincipal menuP = new menuPrincipal();
-        menuP.setVisible(true);
+        menuOperacionesCRUD menuOpe = new menuOperacionesCRUD();
+        menuOpe.setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_btnVolverAlMenuPActionPerformed
 
     private void btnVentanaEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentanaEditarActionPerformed
@@ -120,7 +121,7 @@ public class tablaRegistroDueños extends javax.swing.JFrame {
         modificarRegistroDueño modificarR = new modificarRegistroDueño();
         modificarR.setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_btnVentanaEditarActionPerformed
 
     /**

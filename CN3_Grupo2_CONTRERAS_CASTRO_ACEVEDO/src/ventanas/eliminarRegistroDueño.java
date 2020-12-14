@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import CRUD.duenoMascota;
+import vo.duenoMascota;
 
 /**
  *
@@ -126,12 +126,13 @@ public class eliminarRegistroDueño extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverAlMenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverAlMenuPActionPerformed
         // TODO add your handling code here:
-        menuPrincipal menuP = new menuPrincipal();
-        menuP.setVisible(true);
+        menuOperacionesCRUD menuOpe = new menuOperacionesCRUD();
+        menuOpe.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_btnVolverAlMenuPActionPerformed

@@ -5,9 +5,11 @@
  */
 package operaciones;
 
+import db.BaseDatos;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import ventanas.menuPrincipal;
-import javax.swing.*;
+import ventanas.menuOperacionesCRUD;
+import vo.duenoMascota;
 
 /**
  *
@@ -27,8 +29,8 @@ public class Logica {
 
         if ((Usuario.equals("admin")) && (Clave.equals("abcdef"))) {
             JOptionPane.showMessageDialog(null, "acceso correcto");
-            menuPrincipal menuP = new menuPrincipal();
-            menuP.setVisible(true);
+            menuOperacionesCRUD menuOpe = new menuOperacionesCRUD();
+            menuOpe.setVisible(true);
 
         } else {
             JOptionPane.showMessageDialog(null, "Credenciales Erroneas");
@@ -52,5 +54,11 @@ public class Logica {
     public void setClave(String Clave) {
         this.Clave = Clave;
     }
+    
+    public ResultSet eliminarDuenoMascota(duenoMascota objDuenoMascota){
+    BaseDatos objDB = new BaseDatos();
+    objDuenoMascota = objDB.eliminarDuenoMascota();
+    return objDuenoMascota;
+}
 
 }
