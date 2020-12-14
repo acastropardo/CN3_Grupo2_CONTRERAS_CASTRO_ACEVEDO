@@ -207,9 +207,44 @@ public class tablaConOperacionesCRUD extends javax.swing.JFrame {
 
     private void btnEliminarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRegistroActionPerformed
         // TODO add your handling code here:
-        eliminarRegistroDueño eliminarRegistro = new eliminarRegistroDueño();
-        eliminarRegistro.setVisible(true);
-        this.dispose();
+        //eliminarRegistroDueño eliminarRegistro = new eliminarRegistroDueño();
+        //eliminarRegistro.setVisible(true);
+        //this.dispose();
+
+        int indice = 0;
+        int fila = 0;
+
+        duenoMascota duenoMascotaEliminar;
+
+        fila = this.tableOpCRUD.getSelectedRow();
+        fila++;//se suma uno para que queden iguales
+
+        System.out.println("fila seleccionada " + fila);
+
+        if (fila > -1) {
+            int decision = JOptionPane.YES_NO_OPTION;
+            if (JOptionPane.showConfirmDialog(null, "¡Está usted seguro de eliminar el registro?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                try {
+                    ResultSet rs = BaseDatos.leerDuenosMascotas();
+                    rs.absolute(fila);
+                    indice = rs.getInt("idDuenoMascota");
+
+                    duenoMascotaEliminar = BaseDatos.leerDuenoMascota(indice);
+
+                    BaseDatos.eliminarDuenoMascota(duenoMascotaEliminar);
+                    JOptionPane.showConfirmDialog(null, "Datos eliminados correctamente", "OK", JOptionPane.PLAIN_MESSAGE);
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(tablaConOperacionesCRUD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                // no pasa nada
+            }
+
+        }
+
     }//GEN-LAST:event_btnEliminarRegistroActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
