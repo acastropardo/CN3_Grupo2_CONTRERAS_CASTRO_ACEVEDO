@@ -5,15 +5,26 @@
  */
 package ventanas;
 
+import db.BaseDatos;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import vo.duenoMascota;
+
 /**
  *
- * @author oacon
+ * @author abrah
  */
 public class modificarRegistroDueño extends javax.swing.JFrame {
 
     /**
      * Creates new form modificarRegistroDueño
      */
+    
+    private int idDuenoMascota;
+    private duenoMascota duenoMascotaEditar;
+    
     public modificarRegistroDueño() {
         initComponents();
     }
@@ -32,7 +43,7 @@ public class modificarRegistroDueño extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtidDuenoMascota = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -57,10 +68,18 @@ public class modificarRegistroDueño extends javax.swing.JFrame {
         jTextField3.setText("jTextField3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("ID Dueño:");
 
         jLabel2.setText("Nombre ");
+
+        txtidDuenoMascota.setEditable(false);
+        txtidDuenoMascota.setName("idDuenoMascota"); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
@@ -68,6 +87,11 @@ public class modificarRegistroDueño extends javax.swing.JFrame {
 
         btnModificarImformacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnModificarImformacion.setText("Modificar");
+        btnModificarImformacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarImformacionActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnLimpiar.setText("Limpiar");
@@ -163,7 +187,7 @@ public class modificarRegistroDueño extends javax.swing.JFrame {
                             .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtApellido)
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtidDuenoMascota, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ComboSexoDueño, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -190,7 +214,7 @@ public class modificarRegistroDueño extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtidDuenoMascota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -263,6 +287,46 @@ public class modificarRegistroDueño extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEdadActionPerformed
 
+    private void btnModificarImformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarImformacionActionPerformed
+        // TODO add your handling code here:
+        String txtSexoDueno = (String) ComboSexoDueño.getSelectedItem();
+        String txtSexoMascota = (String) ComboSexoMascota.getSelectedItem();
+        
+        duenoMascotaEditar.setApellido(txtApellido.getText());
+        duenoMascotaEditar.setNombre(txtNombre.getText());
+        duenoMascotaEditar.setEdad(Integer.valueOf(txtEdad.getText()));
+        duenoMascotaEditar.setNombreMascota(txtNombreMascota.getText());
+        duenoMascotaEditar.setSexo(txtSexoDueno.charAt(0));
+        duenoMascotaEditar.setSexoMascota(txtSexoMascota.charAt(0));
+        
+        try {
+            BaseDatos.actualizarDuenoMascota(duenoMascotaEditar);
+            JOptionPane.showConfirmDialog(null, "Datos actualizados correctamente","OK", JOptionPane.PLAIN_MESSAGE);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(modificarRegistroDueño.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_btnModificarImformacionActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+                try {
+            // TODO add your handling code here:
+            duenoMascotaEditar = BaseDatos.leerDuenoMascota(this.idDuenoMascota);
+            txtidDuenoMascota.setText(Integer.toString(duenoMascotaEditar.getIdDuenoMascota()));
+            txtNombre.setText(duenoMascotaEditar.getNombre());
+            txtApellido.setText(duenoMascotaEditar.getApellido());
+            txtEdad.setText(Integer.toString(duenoMascotaEditar.getEdad()));
+            txtNombreMascota.setText(duenoMascotaEditar.getNombreMascota());
+            ComboSexoDueño.setSelectedItem(duenoMascotaEditar.getSexo());
+            ComboSexoMascota.setSelectedItem(duenoMascotaEditar.getSexoMascota());
+        } catch (SQLException ex) {
+            Logger.getLogger(modificarRegistroDueño.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -317,11 +381,26 @@ public class modificarRegistroDueño extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreMascota;
+    private javax.swing.JTextField txtidDuenoMascota;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the idDuenoMascota
+     */
+    public int getIdDuenoMascota() {
+        return idDuenoMascota;
+    }
+
+    /**
+     * @param idDuenoMascota the idDuenoMascota to set
+     */
+    public void setIdDuenoMascota(int idDuenoMascota) {
+        this.idDuenoMascota = idDuenoMascota;
+    }
+
 }

@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author oacon
+ * @author abrah
  */
 public class crearRegistroNuevo extends javax.swing.JFrame {
 

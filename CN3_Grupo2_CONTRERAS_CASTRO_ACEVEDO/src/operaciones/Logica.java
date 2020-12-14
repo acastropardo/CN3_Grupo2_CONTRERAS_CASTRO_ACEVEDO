@@ -54,11 +54,5 @@ public class Logica {
     public void setClave(String Clave) {
         this.Clave = Clave;
     }
-    
-    public ResultSet eliminarDuenoMascota(duenoMascota objDuenoMascota){
-    BaseDatos objDB = new BaseDatos();
-    objDuenoMascota = objDB.eliminarDuenoMascota();
-    return objDuenoMascota;
-}
 
 }

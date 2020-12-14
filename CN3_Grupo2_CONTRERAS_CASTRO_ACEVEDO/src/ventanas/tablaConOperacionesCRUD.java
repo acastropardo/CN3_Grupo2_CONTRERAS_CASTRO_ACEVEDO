@@ -10,19 +10,24 @@ package ventanas;
  * @author oacon
  */
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.*;
-public class tablaConOperacionesCRUD extends javax.swing.JFrame {
+import javax.swing.table.TableModel;
+import db.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import vo.duenoMascota;
 
+public class tablaConOperacionesCRUD extends javax.swing.JFrame {
 
     /**
      * Creates new form tablaConOperacionesCRUD
      */
     public tablaConOperacionesCRUD() {
         initComponents();
-        
-    }
-    
 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +47,11 @@ public class tablaConOperacionesCRUD extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         tableOpCRUD.setBackground(new java.awt.Color(0, 204, 204));
         tableOpCRUD.setModel(new javax.swing.table.DefaultTableModel(
@@ -67,6 +77,7 @@ public class tablaConOperacionesCRUD extends javax.swing.JFrame {
             }
         ));
         tableOpCRUD.setToolTipText("");
+        tableOpCRUD.setRowSelectionAllowed(true);
         jScrollPane1.setViewportView(tableOpCRUD);
 
         btnEliminarRegistro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -153,8 +164,7 @@ public class tablaConOperacionesCRUD extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-   
-            
+
     private void btnMenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMenuPActionPerformed
@@ -168,9 +178,31 @@ public class tablaConOperacionesCRUD extends javax.swing.JFrame {
 
     private void btnEditarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarDatosActionPerformed
         // TODO add your handling code here:
-        modificarRegistroDueño modificarRegistro = new modificarRegistroDueño();
-        modificarRegistro.setVisible(true);
-        this.dispose();
+        int indice = 0;
+        int fila = 0;
+
+        fila = this.tableOpCRUD.getSelectedRow();
+        fila++;//se suma uno para que queden iguales
+
+        System.out.println("fila seleccionada " + fila);
+        if (fila > -1) {
+
+            try {
+                ResultSet rs = BaseDatos.leerDuenosMascotas();
+                rs.absolute(fila);
+                indice = rs.getInt("idDuenoMascota");
+            } catch (SQLException ex) {
+                Logger.getLogger(tablaConOperacionesCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (indice > 0) {//encontrado entonces carga objeto y abre ventana
+                modificarRegistroDueño modificarRegistro = new modificarRegistroDueño();
+                modificarRegistro.setIdDuenoMascota(indice);
+                modificarRegistro.setVisible(true);
+                this.dispose();
+            }
+        }
+
+
     }//GEN-LAST:event_btnEditarDatosActionPerformed
 
     private void btnEliminarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRegistroActionPerformed
@@ -179,6 +211,24 @@ public class tablaConOperacionesCRUD extends javax.swing.JFrame {
         eliminarRegistro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnEliminarRegistroActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            llenaTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(tablaRegistroDueños.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    public void llenaTabla() throws SQLException {
+        ResultSet rs = BaseDatos.leerDuenosMascotas();
+
+        TableModel dtm = BaseDatos.convierteResultSetaTableModel(rs);
+
+        this.tableOpCRUD.setModel(dtm);
+    }
 
     /**
      * @param args the command line arguments
@@ -194,16 +244,24 @@ public class tablaConOperacionesCRUD extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tablaConOperacionesCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tablaConOperacionesCRUD.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tablaConOperacionesCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tablaConOperacionesCRUD.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tablaConOperacionesCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tablaConOperacionesCRUD.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tablaConOperacionesCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tablaConOperacionesCRUD.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
