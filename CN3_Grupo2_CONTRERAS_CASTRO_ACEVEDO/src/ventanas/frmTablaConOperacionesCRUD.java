@@ -17,6 +17,7 @@ import javax.swing.table.TableModel;
 import db.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import vo.DuenoMascota;
 
@@ -259,8 +260,8 @@ public class frmTablaConOperacionesCRUD extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             llenaTabla();
-            //this.btnEditarDatos.setEnabled(false);//inicialmente apagados @acp15/12/2020
-            //this.btnEliminarRegistro.setEnabled(false);
+            this.btnEditarDatos.setEnabled(false);//inicialmente apagados @acp15/12/2020
+            this.btnEliminarRegistro.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(frmTablaConOperacionesCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -334,4 +335,23 @@ public class frmTablaConOperacionesCRUD extends javax.swing.JFrame {
     private javax.swing.JTable tableOpCRUD;
     // End of variables declaration//GEN-END:variables
 
+    class manejadorSeleccionTabla implements ListSelectionListener {
+
+        private Object output;
+        private JFrame frame = new frmTablaConOperacionesCRUD();
+
+        public manejadorSeleccionTabla() {
+        }
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+
+            int firstIndex = e.getFirstIndex();
+            int lastIndex = e.getLastIndex();
+
+            System.out.println("Indice seleccionado " + firstIndex + " " + lastIndex);
+            enciendeBotones();//encender botones, ya que algo fue seleccoinado en la tabla @acp15/12/2020
+        }
+    }
 }
