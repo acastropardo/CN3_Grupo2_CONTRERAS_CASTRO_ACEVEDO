@@ -22,7 +22,7 @@ import java.sql.*;
 public class ConexionBD {
 
     //private static String url = "jdbc:mysql://theacpinnovacion.com:3306/ClinicaVeterinariaBD";//BD en dominio cloud inicial, queda deprecado para que el profe pueda probar en local, aunque sigue arriba @acp14/12/2020
-    private static String url = "jdbc:mysql://127.0.0.1:3306/ClinicaVeterinariaBD";
+    private static String url = "jdbc:mysql://127.0.0.1:3306/ClinicaVeterinariaBD"; //conexion local
     private static String user = "root";
     private static String pass = "123456";
     private static Connection conn = null;
