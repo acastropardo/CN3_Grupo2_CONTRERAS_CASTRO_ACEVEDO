@@ -82,12 +82,23 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
                 txtEdadActionPerformed(evt);
             }
         });
+        txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEdadKeyTyped(evt);
+            }
+        });
 
         jLabel11.setText("Sexo");
 
         jLabel5.setText("Apellido");
 
         jLabel2.setText("Nombre ");
+
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
 
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +120,11 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
         ComboSexoDueño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F", " " }));
 
         ComboSexoMascota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F", " " }));
+        ComboSexoMascota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboSexoMascotaActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Edad");
 
@@ -241,6 +257,12 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtEdad.setText("");
+        ComboSexoDueño.setSelectedIndex(-1);
+        txtNombreMascota.setText("");
+        ComboSexoMascota.setSelectedIndex(-1);
 
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
@@ -267,6 +289,29 @@ public class crearRegistroNuevo extends javax.swing.JFrame {
             Logger.getLogger(crearRegistroNuevo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnIngresarRegistroActionPerformed
+
+    private void ComboSexoMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboSexoMascotaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboSexoMascotaActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
+        // TODO add your handling code here:
+        
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números.");
+        }
+
+    }//GEN-LAST:event_txtEdadKeyTyped
 
     /**
      * @param args the command line arguments

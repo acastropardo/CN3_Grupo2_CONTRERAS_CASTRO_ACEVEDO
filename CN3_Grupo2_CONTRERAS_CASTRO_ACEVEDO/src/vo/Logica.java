@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package operaciones;
+package vo;
 
+import vo.*;
 import db.BaseDatos;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -28,7 +29,7 @@ public class Logica {
     public void Validacion() {
 
         if ((Usuario.equals("admin")) && (Clave.equals("abcdef"))) {
-            JOptionPane.showMessageDialog(null, "acceso correcto");
+            JOptionPane.showMessageDialog(null, "Acceso Correcto");
             menuOperacionesCRUD menuOpe = new menuOperacionesCRUD();
             menuOpe.setVisible(true);
 

@@ -81,6 +81,12 @@ public class modificarRegistroDueño extends javax.swing.JFrame {
         txtidDuenoMascota.setEditable(false);
         txtidDuenoMascota.setName("idDuenoMascota"); // NOI18N
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
         jLabel4.setText("Modificar Datos ");
@@ -112,6 +118,11 @@ public class modificarRegistroDueño extends javax.swing.JFrame {
         txtEdad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEdadActionPerformed(evt);
+            }
+        });
+        txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEdadKeyTyped(evt);
             }
         });
 
@@ -275,7 +286,9 @@ public class modificarRegistroDueño extends javax.swing.JFrame {
         txtNombre.setText("");
         txtApellido.setText("");
         txtEdad.setText("");
+        ComboSexoDueño.setSelectedIndex(-1);
         txtNombreMascota.setText("");
+        ComboSexoMascota.setSelectedIndex(-1);
         
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
@@ -326,6 +339,33 @@ public class modificarRegistroDueño extends javax.swing.JFrame {
             Logger.getLogger(modificarRegistroDueño.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
+        // TODO add your handling code here:
+            char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números.");
+        }
+    }//GEN-LAST:event_txtEdadKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+         char validar = evt.getKeyChar();
+
+        if (Character.isDigit(validar)) {
+            getToolkit().beep();
+
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Letras.");
+        }
+        
+    }//GEN-LAST:event_txtNombreKeyTyped
 
     /**
      * @param args the command line arguments

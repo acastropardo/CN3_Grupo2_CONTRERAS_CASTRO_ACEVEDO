@@ -5,7 +5,7 @@
  */
 package ventanas;
 
-import operaciones.Logica;
+import vo.Logica;
 
 /**
  *
