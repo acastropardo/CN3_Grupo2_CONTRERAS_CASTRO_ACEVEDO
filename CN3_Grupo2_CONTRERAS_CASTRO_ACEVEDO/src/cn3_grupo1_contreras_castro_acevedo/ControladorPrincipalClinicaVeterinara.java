@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn3_grupo2_contreras_castro_acevedo;
+package cn3_grupo1_contreras_castro_acevedo;
 
 import com.sun.glass.ui.Cursor;
 import java.sql.SQLException;
