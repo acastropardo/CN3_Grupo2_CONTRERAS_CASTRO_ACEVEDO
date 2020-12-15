@@ -87,6 +87,12 @@ public class frmModificarRegistroDueño extends javax.swing.JFrame {
             }
         });
 
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyTyped(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
         jLabel4.setText("Modificar Datos ");
@@ -135,6 +141,11 @@ public class frmModificarRegistroDueño extends javax.swing.JFrame {
         txtNombreMascota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreMascotaActionPerformed(evt);
+            }
+        });
+        txtNombreMascota.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreMascotaKeyTyped(evt);
             }
         });
 
@@ -362,10 +373,36 @@ public class frmModificarRegistroDueño extends javax.swing.JFrame {
 
             evt.consume();
 
-            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Letras.");
+            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Letras en este campo.");
         }
         
     }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtNombreMascotaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreMascotaKeyTyped
+        // TODO add your handling code here:
+          char validar = evt.getKeyChar();
+
+        if (Character.isDigit(validar)) {
+            getToolkit().beep();
+
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Letras en este campo.");
+        }
+    }//GEN-LAST:event_txtNombreMascotaKeyTyped
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
+        // TODO add your handling code here:
+          char validar = evt.getKeyChar();
+
+        if (Character.isDigit(validar)) {
+            getToolkit().beep();
+
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Letras en este campo.");
+        }
+    }//GEN-LAST:event_txtApellidoKeyTyped
 
     /**
      * @param args the command line arguments
