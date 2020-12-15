@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `DuenoMascota` (
   `nombreMascota` varchar(100) DEFAULT NULL,
   `sexoMascota` char(1) DEFAULT NULL,
   PRIMARY KEY (`idDuenoMascota`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
