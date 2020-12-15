@@ -5,14 +5,14 @@
  */
 package db;
 
-import db.conexionBD;
+import db.ConexionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
-import vo.duenoMascota;
+import vo.DuenoMascota;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -26,11 +26,11 @@ import javax.swing.table.TableModel;
  */
 public class BaseDatos {
 
-    public static duenoMascota leerDuenoMascota(int indice) throws SQLException {
-        duenoMascota duenoMasc = new duenoMascota();
+    public static DuenoMascota leerDuenoMascota(int indice) throws SQLException {
+        DuenoMascota duenoMasc = new DuenoMascota();
         try {
             
-            Connection conn = conexionBD.getConexion();
+            Connection conn = ConexionBD.getConexion();
             String sql = "select * from DuenoMascota where idDuenoMascota = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, indice);
@@ -52,9 +52,9 @@ public class BaseDatos {
         return duenoMasc;
     }
 
-    public static void actualizarDuenoMascota(duenoMascota objDuenoMascota) throws SQLException {
+    public static void actualizarDuenoMascota(DuenoMascota objDuenoMascota) throws SQLException {
         try {
-            Connection conn = conexionBD.getConexion();
+            Connection conn = ConexionBD.getConexion();
             String sql = "update DuenoMascota SET nombre = ?, apellido = ?, edad = ?, sexo = ?, nombreMascota = ?, sexoMascota = ? where idDuenoMascota = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
 
@@ -73,9 +73,9 @@ public class BaseDatos {
         }
     }
 
-    public static void eliminarDuenoMascota(duenoMascota objDuenoMascota) throws SQLException {
+    public static void eliminarDuenoMascota(DuenoMascota objDuenoMascota) throws SQLException {
         try {
-            Connection conn = conexionBD.getConexion();
+            Connection conn = ConexionBD.getConexion();
 
             String sql = "delete from DuenoMascota where idDuenoMascota = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -89,9 +89,9 @@ public class BaseDatos {
         }
     }
 
-    public static void agregarDuenoMascota(duenoMascota objDuenoMascota) throws SQLException {
+    public static void agregarDuenoMascota(DuenoMascota objDuenoMascota) throws SQLException {
         try {
-            Connection conn = conexionBD.getConexion();
+            Connection conn = ConexionBD.getConexion();
 
             String sql = "insert into DuenoMascota values (?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -145,7 +145,7 @@ public class BaseDatos {
     }
 
     public static ResultSet leerDuenosMascotas() throws SQLException {
-        Connection conn = conexionBD.getConexion();
+        Connection conn = ConexionBD.getConexion();
 
         PreparedStatement pst = conn.prepareStatement("SELECT * FROM DuenoMascota");
         ResultSet rs = pst.executeQuery();
@@ -153,17 +153,17 @@ public class BaseDatos {
 
     }
 
-    public static List<duenoMascota> listarDuenosMascotas() throws SQLException {
+    public static List<DuenoMascota> listarDuenosMascotas() throws SQLException {
 
-        Connection conn = conexionBD.getConexion();
+        Connection conn = ConexionBD.getConexion();
 
         PreparedStatement pst = conn.prepareStatement("SELECT * FROM DuenoMascota");
         ResultSet rs = pst.executeQuery();
 
-        List<duenoMascota> duenos = new ArrayList<duenoMascota>();
+        List<DuenoMascota> duenos = new ArrayList<DuenoMascota>();
 
         while (rs.next()) {
-            duenoMascota duenoMasc = new duenoMascota();
+            DuenoMascota duenoMasc = new DuenoMascota();
             duenoMasc.setIdDuenoMascota(rs.getInt("idDuenoMascota"));
             duenoMasc.setNombre(rs.getString("nombre"));
             duenoMasc.setApellido(rs.getString("apellido"));
