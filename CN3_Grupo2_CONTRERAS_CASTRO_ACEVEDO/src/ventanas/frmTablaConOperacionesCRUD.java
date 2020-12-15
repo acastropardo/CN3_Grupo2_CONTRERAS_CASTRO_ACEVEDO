@@ -250,6 +250,8 @@ public class frmTablaConOperacionesCRUD extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
+        setIconImage(new ImageIcon(getClass().getResource("/imagen/ClinicaVete.png")).getImage());
+
         listSelectionModel = tableOpCRUD.getSelectionModel();//para pillar eventos de seleccion y activar asi los botones edicion y editar @acp15-12-2020 
         listSelectionModel.addListSelectionListener(new manejadorSeleccionTabla());
         listSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

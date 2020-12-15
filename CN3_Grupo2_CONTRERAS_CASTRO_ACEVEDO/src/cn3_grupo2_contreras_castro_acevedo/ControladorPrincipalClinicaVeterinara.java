@@ -8,7 +8,6 @@ package cn3_grupo2_contreras_castro_acevedo;
 import com.sun.glass.ui.Cursor;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
-import ventanas.frmIcono;
 import ventanas.frmInterfazLogin;
 import ventanas.frmMenuOperacionesCRUD;
 import ventanas.frmTablaConOperacionesCRUD;
@@ -22,8 +21,7 @@ public class ControladorPrincipalClinicaVeterinara {
     public static void main(String[] args) throws SQLException {
        // TODO code application logic here
     frmInterfazLogin interfazLog = new frmInterfazLogin();
-    interfazLog.setVisible(true);
-    
+    interfazLog.setVisible(true);    
     }
     
     

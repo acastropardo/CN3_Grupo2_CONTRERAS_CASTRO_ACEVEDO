@@ -10,6 +10,7 @@ import vo.DuenoMascota;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +24,8 @@ public class frmCrearRegistroNuevo extends javax.swing.JFrame {
      */
     public frmCrearRegistroNuevo() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/imagen/ClinicaVete.png")).getImage());
+
     }
 
     /**

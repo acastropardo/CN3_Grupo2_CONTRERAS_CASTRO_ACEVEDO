@@ -9,6 +9,7 @@ import db.BaseDatos;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import vo.DuenoMascota;
 
@@ -27,6 +28,8 @@ public class frmModificarRegistroDueño extends javax.swing.JFrame {
     
     public frmModificarRegistroDueño() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/imagen/ClinicaVete.png")).getImage());
+
     }
 
     /**

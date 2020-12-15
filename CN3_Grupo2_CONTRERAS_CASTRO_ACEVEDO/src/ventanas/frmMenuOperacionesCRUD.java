@@ -5,6 +5,8 @@
  */
 package ventanas;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author oacon
@@ -16,6 +18,8 @@ public class frmMenuOperacionesCRUD extends javax.swing.JFrame {
      */
     public frmMenuOperacionesCRUD() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/imagen/ClinicaVete.png")).getImage());
+
     }
 
     /**

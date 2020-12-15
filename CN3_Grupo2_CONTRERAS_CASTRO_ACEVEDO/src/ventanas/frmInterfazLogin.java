@@ -5,6 +5,7 @@
  */
 package ventanas;
 
+import javax.swing.ImageIcon;
 import vo.ValidacionCredenciales;
 
 /**
@@ -18,6 +19,8 @@ public class frmInterfazLogin extends javax.swing.JFrame {
      */
     public frmInterfazLogin() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/imagen/ClinicaVete.png")).getImage());
+
     }
 
     /**
