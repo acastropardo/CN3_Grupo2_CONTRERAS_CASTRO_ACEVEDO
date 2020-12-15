@@ -20,22 +20,26 @@ public class ValidacionCredenciales {
 
     private String Usuario;
     private String Clave;
+    private int x;
 
     public ValidacionCredenciales(String Usuario, String Clave) {
         this.Usuario = Usuario;
         this.Clave = Clave;
     }
 
-    public void Validacion() {
+    public int Validacion() {
 
         if ((Usuario.equals("admin")) && (Clave.equals("abcdef"))) {
             JOptionPane.showMessageDialog(null, "Acceso Correcto");
             frmMenuOperacionesCRUD menuOpe = new frmMenuOperacionesCRUD();
             menuOpe.setVisible(true);
+            
+            return x = 1;
 
         } else {
             JOptionPane.showMessageDialog(null, "Credenciales Erroneas");
-
+            
+            return x = 0;
         }
 
     }

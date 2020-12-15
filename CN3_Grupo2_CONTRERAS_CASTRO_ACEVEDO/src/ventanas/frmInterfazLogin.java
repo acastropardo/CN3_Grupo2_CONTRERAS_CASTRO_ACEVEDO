@@ -161,12 +161,13 @@ public class frmInterfazLogin extends javax.swing.JFrame {
         Usuario = (TxtNombre.getText());
         Clave = (TxtClave.getText());
 
-        ValidacionCredenciales ob = new ValidacionCredenciales(Usuario, Clave);
-        ob.Validacion();
-        this.dispose();
-        
-       
-        
+        ValidacionCredenciales ob = new ValidacionCredenciales(Usuario.trim(), Clave.trim());
+        int x = ob.Validacion();
+        if (x == 1) {
+            this.dispose();
+        }
+
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
