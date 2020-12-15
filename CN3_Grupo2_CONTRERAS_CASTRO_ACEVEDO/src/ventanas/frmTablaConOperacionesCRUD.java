@@ -17,6 +17,7 @@ import javax.swing.table.TableModel;
 import db.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.event.ListSelectionListener;
 import vo.DuenoMascota;
 
 public class frmTablaConOperacionesCRUD extends javax.swing.JFrame {
@@ -24,6 +25,8 @@ public class frmTablaConOperacionesCRUD extends javax.swing.JFrame {
     /**
      * Creates new form tablaConOperacionesCRUD
      */
+    ListSelectionModel listSelectionModel;
+
     public frmTablaConOperacionesCRUD() {
         initComponents();
 
@@ -184,11 +187,13 @@ public class frmTablaConOperacionesCRUD extends javax.swing.JFrame {
         int fila = 0;
 
         fila = this.tableOpCRUD.getSelectedRow();
-        fila++;//se suma uno para que queden iguales
 
-        System.out.println("fila seleccionada " + fila);
-        if (fila > -1) {
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado nada para editar");
+        } else if (fila > -1) {
+            fila++;//se suma 1 para que queden iguales porque el indice siempre es 1 menos
 
+            System.out.println("fila seleccionada " + fila);
             try {
                 ResultSet rs = BaseDatos.leerDuenosMascotas();
                 rs.absolute(fila);
@@ -209,21 +214,15 @@ public class frmTablaConOperacionesCRUD extends javax.swing.JFrame {
 
     private void btnEliminarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRegistroActionPerformed
         // TODO add your handling code here:
-        //eliminarRegistroDueño eliminarRegistro = new eliminarRegistroDueño();
-        //eliminarRegistro.setVisible(true);
-        //this.dispose();
-
         int indice = 0;
         int fila = 0;
-
         DuenoMascota duenoMascotaEliminar;
-
         fila = this.tableOpCRUD.getSelectedRow();
-        fila++;//se suma uno para que queden iguales
-
         System.out.println("fila seleccionada " + fila);
-
-        if (fila > -1) {
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado nada para eliminar");
+        } else if (fila > -1) {
+            fila++;//se suma uno para que queden iguales
             int decision = JOptionPane.YES_NO_OPTION;
             if (JOptionPane.showConfirmDialog(null, "¡Está usted seguro de eliminar el registro?", "WARNING",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -250,14 +249,26 @@ public class frmTablaConOperacionesCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarRegistroActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
+
+        listSelectionModel = tableOpCRUD.getSelectionModel();//para pillar eventos de seleccion y activar asi los botones edicion y editar @acp15-12-2020 
+        listSelectionModel.addListSelectionListener(new manejadorSeleccionTabla());
+        listSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableOpCRUD.setSelectionModel(listSelectionModel);
         try {
             // TODO add your handling code here:
             llenaTabla();
+            //this.btnEditarDatos.setEnabled(false);//inicialmente apagados @acp15/12/2020
+            //this.btnEliminarRegistro.setEnabled(false);
         } catch (SQLException ex) {
-            Logger.getLogger(frmTablaRegistroDueños.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmTablaConOperacionesCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowActivated
+
+    public void enciendeBotones() {
+        //se habilitan cuando se selecciona algo en la tabla @acp15/12/2020
+        this.btnEditarDatos.setEnabled(true);
+        this.btnEliminarRegistro.setEnabled(true);
+    }
 
     public void llenaTabla() throws SQLException {
         ResultSet rs = BaseDatos.leerDuenosMascotas();
@@ -320,4 +331,5 @@ public class frmTablaConOperacionesCRUD extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableOpCRUD;
     // End of variables declaration//GEN-END:variables
+
 }

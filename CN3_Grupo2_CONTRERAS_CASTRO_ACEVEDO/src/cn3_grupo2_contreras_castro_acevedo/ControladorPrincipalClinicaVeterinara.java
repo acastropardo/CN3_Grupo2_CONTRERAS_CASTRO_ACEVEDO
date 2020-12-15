@@ -12,7 +12,6 @@ import ventanas.frmIcono;
 import ventanas.frmInterfazLogin;
 import ventanas.frmMenuOperacionesCRUD;
 import ventanas.frmTablaConOperacionesCRUD;
-import ventanas.frmTablaRegistroDueños;
 
 /**
  *
@@ -24,13 +23,6 @@ public class ControladorPrincipalClinicaVeterinara {
        // TODO code application logic here
     frmInterfazLogin interfazLog = new frmInterfazLogin();
     interfazLog.setVisible(true);
-    
-    
-    
-//    frmMenuOperacionesCRUD menuOpCRUD = new frmMenuOperacionesCRUD();
-//    frmTablaConOperacionesCRUD tablaCRUD = new frmTablaConOperacionesCRUD();
-//    frmTablaRegistroDueños tablaRegistro = new frmTablaRegistroDueños();
-    
     
     }
     
