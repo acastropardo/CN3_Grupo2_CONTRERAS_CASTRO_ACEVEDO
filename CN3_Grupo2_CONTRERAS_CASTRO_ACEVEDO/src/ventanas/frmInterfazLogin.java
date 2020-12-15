@@ -165,7 +165,7 @@ public class frmInterfazLogin extends javax.swing.JFrame {
         int x = ob.Validacion();
         if (x == 1) {
             this.dispose();
-        }//
+        }
 
 
     }//GEN-LAST:event_btnIngresarActionPerformed
